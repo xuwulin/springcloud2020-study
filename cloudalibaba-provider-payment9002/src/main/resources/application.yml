@@ -1,0 +1,16 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: nacos-payment-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.92.130:1111 # 更换为nginx的1111端口，连接集群，nginx作负载均衡
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

@@ -1,0 +1,9 @@
+server:
+  port: 81
+
+spring:
+  application:
+    name: cloud-order-service
+  cloud:
+    zookeeper:
+      connect-string: 192.168.92.130:2181 # 默认localhost:2181

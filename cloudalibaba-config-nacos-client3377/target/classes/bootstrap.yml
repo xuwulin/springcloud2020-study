@@ -1,0 +1,18 @@
+server:
+  port: 3377
+
+spring:
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # nacos作为服务注册中心地址
+      config:
+        server-addr: localhost:8848 # nacos作为配置中心地址
+        file-extension: yaml # 指定yaml格式的配置，这里指定的文件格式需要和nacos上新建的配置文件后缀相同，否则读不到
+        group: DEV_GROUP
+        namespace: 4bf09fcc-6dcb-48a1-9dcd-396a19c4ed43
+
+# ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+# nacos-config-client-dev.yaml

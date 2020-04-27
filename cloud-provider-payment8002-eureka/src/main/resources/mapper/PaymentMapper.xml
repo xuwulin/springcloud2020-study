@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 表明映射哪个dao接口 -->
+<mapper namespace="com.xwl.springcloud.dao.PaymentDao">
+
+    <resultMap id="BaseResultMap" type="com.xwl.springcloud.entities.Payment">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="serial" property="serial" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 因为在配置文件中配置了：type-aliases-package: com.xwl.springcloud.entities # 所有Entity别名类所在包
+         所以这里的 parameterType="Payment"可以不用写全类名：com.xwl.springcloud.entities.Payment，当然写全类名也没问题
+         useGeneratedKeys="true：插入成功后会返回一个数字，如果这个数字大于0表明插入成功，否则插入失败
+         当主键是自增的情况下，添加一条记录的同时，其主键是不能使用的，但是有时我们需要该主键，则需要添加keyProperty="id"
+         keyProperty="id"；主要是在主键是自增的情况下，添加成功后可以直接使用主键值，其中keyProperty的值是对象的属性值不是数据库表中的字段名
+    -->
+    <insert id="create" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
+        insert into payment(serial) values(#{serial});
+    </insert>
+
+    <select id="getPaymentById" parameterType="Long" resultMap="BaseResultMap">
+        select * from payment where id = #{id};
+    </select>
+</mapper>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 包名 -->
+    <groupId>com.xwl.springcloud</groupId>
+    <!-- 工程名 -->
+    <artifactId>springcloud2020-study</artifactId>
+    <!-- 版本号 -->
+    <version>1.0-SNAPSHOT</version>
+    <!-- 表明这是一个父工程 -->
+    <packaging>pom</packaging>
+
+    <!-- 子模块 -->
+    <modules>
+        <module>cloud-provider-payment8001-eureka</module>
+        <module>cloud-provider-payment8002-eureka</module>
+        <module>cloud-consumer-order80-eureka</module>
+        <module>cloud-api-commons</module>
+        <module>cloud-eureka-server7001</module>
+        <module>cloud-eureka-server7002</module>
+        <module>cloud-provider-payment8003-zk</module>
+        <module>cloud-consumer-order81-zk</module>
+        <module>cloud-provider-payment8004-consul</module>
+        <module>cloud-consumer-order82-consul</module>
+        <module>cloud-consumer-order83-openfign</module>
+        <module>cloud-provider-payment8005-hystrix</module>
+        <module>cloud-consumer-order84-openfign-hystrix</module>
+        <module>cloud-consumer-hystrix-dashboard9001</module>
+        <module>cloud-gateway-gateway9527</module>
+        <module>cloud-config-center-3344</module>
+        <module>cloud-config-client-3355</module>
+        <module>cloud-config-client-3366</module>
+        <module>cloud-stream-rabbitmq-provider8801</module>
+        <module>cloud-stream-rabbitmq-consumer8802</module>
+        <module>cloud-stream-rabbitmq-consumer8803</module>
+        <module>cloudalibaba-provider-payment9001</module>
+        <module>cloudalibaba-provider-payment9002</module>
+        <module>cloudalibaba-consumer-nacos-order83</module>
+        <module>cloudalibaba-config-nacos-client3377</module>
+        <module>cloudalibaba-sentinel-service8401</module>
+        <module>cloudalibaba-provider-payment9003</module>
+        <module>cloudalibaba-provider-payment9004</module>
+        <module>cloudalibaba-consumer-nacos-order84</module>
+        <module>seata-order-service2001</module>
+        <module>seata-storage-service2002</module>
+        <module>seata-account-service2003</module>
+    </modules>
+
+    <!-- 统一管理jar包和版本 -->
+    <properties>
+        <!-- 字符编码集 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- java编译版本 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <junit.version>4.12</junit.version>
+        <log4j.version>1.2.17</log4j.version>
+        <lombok.version>1.16.18</lombok.version>
+        <!-- mysql驱动版本号 -->
+        <mysql.version>5.1.47</mysql.version>
+        <!-- druid数据源版本号 -->
+        <druid.verison>1.1.16</druid.verison>
+        <!-- mybatis和springboot整合的版本号 -->
+        <mybatis.spring.boot.verison>1.3.0</mybatis.spring.boot.verison>
+    </properties>
+
+    <!-- 父项目中dependencyManagement和dependencies的区别：在父项目的dependencies中引入的依赖，在子项目中会自动引入父项目的依赖（即子项目中不用显示引入）
+         而在父项目的dependencyManagement中引入的依赖，子项目必须要显示的引入该依赖（不用写版本号）才会在子项目中引入该依赖，否则子项目是不会引入该依赖的
+         参考：https://www.cnblogs.com/hjw-zq/p/11708799.html
+    -->
+    <!-- dependencyManagement一般用在父工程(相当于一个总管)：子模块继承之后，提供作用：锁定版本+子model不用写groupId(包名)和version(版本号) -->
+    <!-- dependencyManagement里只是申明依赖，并不引入实际的依赖，因此子项目需要显示申明需要用的依赖 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring boot 2.2.2 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.2.2.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring cloud Hoxton.SR1 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring cloud alibaba 2.1.0.RELEASE -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.1.0.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- MySql连接驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- Druid数据源 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.verison}</version>
+            </dependency>
+            <!-- mybatis-springboot整合 -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.spring.boot.verison}</version>
+            </dependency>
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <!-- junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+            <!-- log4j -->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
