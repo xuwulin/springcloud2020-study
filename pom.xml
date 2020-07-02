@@ -60,7 +60,7 @@
         <log4j.version>1.2.17</log4j.version>
         <lombok.version>1.16.18</lombok.version>
         <!-- mysql驱动版本号 -->
-        <mysql.version>5.1.47</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <!-- druid数据源版本号 -->
         <druid.verison>1.1.16</druid.verison>
         <!-- mybatis和springboot整合的版本号 -->
